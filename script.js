@@ -10,7 +10,7 @@ const quotes = [
 //this function will pick a random quote and shows it on the page
 function generateQuote() {
     const randomIndex = Math.floor(Math.random() * quotes.length);
-    
+
     // find the paragraph tag inside the quote box and change its text
     document.querySelector("#presidential-quote p").textContent = quotes[randomIndex];
 }
@@ -52,16 +52,16 @@ function showQuestion() {
     //first grab the places where we will show our stuff
     const questionBox = document.getElementById('question');
     const answerBox = document.getElementById('answers');
-    
+
     //if we can't find these boxes, dont do anything to prevent an error
     if (!questionBox || !answerBox) return;
 
     //get the current question from our list
     const currentQuestion = quizQuestions[questionNumber];
-    
+
     //show the question text
     questionBox.textContent = currentQuestion.question;
-    
+
     //clear out old answer buttons
     answerBox.innerHTML = '';
 
@@ -71,12 +71,12 @@ function showQuestion() {
         const button = document.createElement('button');
         button.className = 'btn btn-outline-primary mb-2';
         button.textContent = currentQuestion.answers[i];
-        
+
         //when someone clicks the button, check if they got it right
-        button.onclick = function() {
+        button.onclick = function () {
             checkIfCorrect(i);
         };
-        
+
         //add the button to our answer box
         answerBox.appendChild(button);
     }
@@ -86,13 +86,13 @@ function showQuestion() {
 function checkIfCorrect(answerNumber) {
     //get the current question
     const currentQuestion = quizQuestions[questionNumber];
-    
+
     //find where to show the result
     const resultBox = document.getElementById('quiz-result');
-    
+
     //disable all buttons so they can't click again
     const buttons = document.querySelectorAll('#answers button');
-    buttons.forEach(function(button) {
+    buttons.forEach(function (button) {
         button.disabled = true;
     });
 
@@ -106,7 +106,7 @@ function checkIfCorrect(answerNumber) {
     }
 
     //wait 2 seconds then show the next question
-    setTimeout(function() {
+    setTimeout(function () {
         questionNumber = (questionNumber + 1) % quizQuestions.length;
         resultBox.textContent = "";
         showQuestion();
@@ -114,7 +114,7 @@ function checkIfCorrect(answerNumber) {
 }
 
 //when page loads, start the quiz
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     //only start the quiz if your on the quiz page
     if (document.getElementById('quiz-section')) {
         showQuestion();
